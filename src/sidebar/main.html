@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sidebar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    
+</head>
+<body>
+    <div class="container">
+        <div>
+            <p>Click start to begin recording</p>
+        </div>
+        <div>
+            <input type="button" class="btn btn-success" value="Start" id="start">
+            <input type="button" class="btn btn-danger" value="Stop" id="stop" style="display:none">
+        </div>
+        <div class="url-info">
+            <table class="table" id="info">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>TIME</th>
+                        <th>METHOD</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

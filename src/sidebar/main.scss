@@ -1,0 +1,11 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.url-info {
+    padding: 10px;
+    overflow:auto;
+    max-height: 75%;
+    .border-wrap {
+        border: 1px solid red;
+        border-radius: 2px;
+    }    
+}

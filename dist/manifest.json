@@ -1,0 +1,19 @@
+{
+
+    "manifest_version": 2,
+    "name": "Requests Spy",
+    "description": "Spies on request made by a webpage loaded in a tab you are intersted in...",
+    "version": "1.0",
+    "applications": {
+      "gecko": {
+        "strict_min_version": "54.0a1"
+      }
+    },
+  
+    "sidebar_action": {      
+      "default_title" : "Requests Spy",
+      "default_panel": "sidebar/main.html"
+    },
+  
+    "permissions": ["tabs", "webRequest", "<all_urls>"]  
+  }
