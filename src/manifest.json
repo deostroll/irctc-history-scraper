@@ -1,8 +1,8 @@
 {
 
     "manifest_version": 2,
-    "name": "Requests Spy",
-    "description": "Spies on request made by a webpage loaded in a tab you are intersted in...",
+    "name": "IRCTC Booked History Scrape",
+    "description": "Scrapes your Indian Railways Booked Ticket History",
     "version": "1.0",
     "applications": {
       "gecko": {
@@ -11,9 +11,9 @@
     },
   
     "sidebar_action": {      
-      "default_title" : "Requests Spy",
+      "default_title" : "IRCTC Tickets Scraper",
       "default_panel": "sidebar/main.html"
     },
   
-    "permissions": ["tabs", "webRequest", "<all_urls>"]  
+    "permissions": ["tabs", "webRequest", "<all_urls>", "activeTab"]  
   }

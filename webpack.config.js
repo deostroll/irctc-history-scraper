@@ -6,7 +6,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = [
     {
         mode,
-        entry: './src/sidebar/main.js',
+        entry: absolutify('./src/sidebar/main.js'),
         output: {
             path: absolutify('./dist/sidebar')
         },
@@ -29,30 +29,5 @@ module.exports = [
         devtool: 'cheap-source-map',
 
     },
-    {
-        mode,
-        
-        plugins: [
-            new CopyWebpackPlugin([
-                {
-                    from: absolutify('src/sidebar/main.html'),
-                    to: absolutify('dist/sidebar')
-                }
-            ])
-        ],
-
-    },
-    {
-        mode,
-        
-        plugins: [
-            new CopyWebpackPlugin([
-                {
-                    from: absolutify('src/manifest.json'),
-                    dist: absolutify('dist/mainfest.json')
-                }
-            ])
-        ],
-
-    }
+    
 ];

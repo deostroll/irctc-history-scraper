@@ -71,70 +71,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "../../../../../local/lib/node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ "../../../../../local/lib/node_modules/webpack/buildin/module.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/module.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./src/sidebar/main.scss":
 /*!**************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./src/sidebar/main.scss ***!
@@ -27747,7 +27683,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../local/lib/node_modules/webpack/buildin/module.js */ "../../../../../local/lib/node_modules/webpack/buildin/module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
 
 /***/ }),
 
@@ -28800,7 +28736,71 @@ URL.qs = qs;
 
 module.exports = URL;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../local/lib/node_modules/webpack/buildin/global.js */ "../../../../../local/lib/node_modules/webpack/buildin/global.js")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/module.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
 
 /***/ }),
 
@@ -28832,87 +28832,55 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import _bootstrap from 'bootstrap/dist/css/bootstrap.css';
 (0, _jquery2.default)(function () {
-    var btnStop = (0, _jquery2.default)('#stop');
-    var btnStart = (0, _jquery2.default)('#start');
-    var div = (0, _jquery2.default)('.url-info');
+    console.log(_jquery2.default.fn.jquery);
+    var btnFetch = (0, _jquery2.default)('#btnFetch');
+    var btnDownload = (0, _jquery2.default)('#btnDownload');
+    var tbl = (0, _jquery2.default)('tbody', '#info');
+    // console.log(btnFetch);
+    btnFetch.click(function (e) {
+        console.log('clicked..');
+        getCurrentTab().then(function (tabObj) {
+            var tabId = tabObj.tabId;
 
-    var tblInfo = (0, _jquery2.default)('#info');
-    tblInfo.hide();
-
-    var listener = void 0;
-    var counter = 0;
-    var listening = false;
-    var timeString = 'HH:mm:ss';
-
-    var addRow = function addRow(count, method, url, timestamp) {
-        var uInfo = new _urlParse2.default(url);
-        var c = (0, _jquery2.default)('<td/>').html(count);
-        var t = (0, _jquery2.default)('<td/>').html((0, _moment2.default)(timestamp).format(timeString));
-        var m = (0, _jquery2.default)('<td/>').html(method);
-        var u = (0, _jquery2.default)('<td/>').html(uInfo.pathname);
-
-        var r = (0, _jquery2.default)('<tr/>').append(c).append(t).append(m).append(u);
-        console.log('addRow:', (0, _jquery2.default)('tbody', tblInfo));
-
-        (0, _jquery2.default)('tbody', tblInfo).append(r);
-    };
-
-    btnStart.click(function () {
-        browser.windows.getCurrent({ populate: true }).then(function (windowInfo) {
-            return windowInfo.id;
-        }).then(function (winId) {
-            return browser.tabs.query({ windowId: winId, active: true }).then(function (tabs) {
-                return Promise.resolve({
-                    tab: tabs[0],
-                    windowId: winId
+            _jquery2.default.ajax({
+                url: '/scripts/foo.js',
+                type: 'GET',
+                dataType: 'text'
+            }).done(function (contents) {
+                console.log('Contents:', contents);
+                browser.tabs.executeScript(tabId, {
+                    code: contents
                 });
+            }).fail(function (err) {
+                return console.error(err);
             });
-        }).then(function (info) {
-            var tab = info.tab,
-                windowId = info.windowId;
 
-            var urlInfo = new _urlParse2.default(tab.url);
-            // let filter = browser.webRequest.RequestFilter();
-            var filter = {};
-
-            console.log('Info:', info);
-
-            filter.windowId = windowId;
-            filter.tabId = tab.id;
-            // console.log('Filter:', urlInfo.origin + '/*')
-            filter.urls = [urlInfo.origin + '/*'];
-
-            listener = function listener(reqInfo) {
-                var method = reqInfo.method,
-                    url = reqInfo.url,
-                    timeStamp = reqInfo.timeStamp;
-
-                counter++;
-                // console.log('URL:', url);
-                addRow(counter, method, url, new Date(timeStamp));
-            };
-
-            browser.webRequest.onBeforeRequest.addListener(listener, filter);
-
-            listening = true;
-            tblInfo.show();
-            btnStart.hide();
-            btnStop.show();
-            div.addClass('border-wrap');
+            // browser.tabs.executeScript(tabId, {
+            //     file: '/scripts/foo.js'
+            // })
+            // .then(result => {
+            //     console.log(result);
+            // })
+            // .catch(err => console.error(err));
         });
     });
-
-    btnStop.click(function () {
-        listening = false;
-        browser.webRequest.onBeforeRequest.removeListener(listener);
-        (0, _jquery2.default)('tbody', tblInfo).empty();
-        tblInfo.hide();
-        btnStart.show();
-        btnStop.hide();
-        counter = 0;
-        div.removeClass('border-wrap');
-    });
 });
+
+function getCurrentTab() {
+    return browser.windows.getCurrent({ populate: true }).then(function (windowInfo) {
+        return browser.tabs.query({
+            windowId: windowInfo.id,
+            active: true
+        }).then(function (tabs) {
+            var tab = tabs[0];
+            return {
+                tab: tab,
+                windowId: windowInfo.id,
+                tabId: tab.id
+            };
+        });
+    });
+}
 
 /***/ }),
 
@@ -28947,4 +28915,3 @@ if(false) {}
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.js.map
